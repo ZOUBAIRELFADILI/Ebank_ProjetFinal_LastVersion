@@ -1,0 +1,102 @@
+<div class="container mt-2">
+  <div class="row">
+    <!-- Colonne pour les informations du client -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-dark text-light">Customer Informations</div>
+        <div class="card-body">
+          <form
+            [formGroup]="newCustomerFormGroup"
+            (ngSubmit)="handleSaveCustomer()"
+          >
+            <div class="mb-3">
+              <label class="form-label">Name : </label>
+              <input type="text" formControlName="name" class="form-control" />
+              <span class="text-danger"
+                    *ngIf="
+              newCustomerFormGroup.controls['name'].touched &&
+              newCustomerFormGroup.controls['name'].errors &&
+              newCustomerFormGroup.controls['name'].errors!['required']">
+            Name is Required
+          </span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email : </label>
+              <input type="email" formControlName="email" class="form-control" />
+              <span class="text-danger"
+                    *ngIf="
+              newCustomerFormGroup.controls['email'].touched &&
+              newCustomerFormGroup.controls['email'].errors &&
+              newCustomerFormGroup.controls['email'].errors!['email']
+          && newCustomerFormGroup.controls['email'].errors!['required']">
+            Email is Not Valid
+          </span>
+            </div>
+            <div>
+              <label class="form-label">City : </label>
+              <input type="text" formControlName="city" class="form-control" />
+              <span class="text-danger"
+                    *ngIf="
+              newCustomerFormGroup.controls['city'].touched &&
+              newCustomerFormGroup.controls['city'].errors &&
+              newCustomerFormGroup.controls['city'].errors!['required']">
+            City is Required
+          </span>
+            </div>
+            <div>
+              <label class="form-label">Date of birth : </label>
+              <input type="Date" formControlName="dateOfBirth" class="form-control" />
+              <span class="text-danger"
+                    *ngIf="
+              newCustomerFormGroup.controls['dateOfBirth'].touched &&
+              newCustomerFormGroup.controls['dateOfBirth'].errors &&
+              newCustomerFormGroup.controls['dateOfBirth'].errors!['required']">
+           Date is Required
+          </span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Phone Number:</label>
+              <input type="text" formControlName="phoneNumber" class="form-control" />
+              <span class="text-danger"
+                    *ngIf="newCustomerFormGroup.controls['phoneNumber'].touched &&
+                   newCustomerFormGroup.controls['phoneNumber'].hasError('required')">
+            Phone Number is Required
+          </span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Gender:</label>
+              <select formControlName="gender" class="form-control">
+                <option value="" disabled selected>Select Gender</option>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+                <option value="OTHER">Other</option>
+              </select>
+              <span class="text-danger"
+                    *ngIf="newCustomerFormGroup.controls['gender'].touched &&
+                   newCustomerFormGroup.controls['gender'].hasError('required')">
+            Gender is Required
+          </span>
+            </div>
+
+            <button
+              [disabled]="!newCustomerFormGroup.valid"
+              class="btn btn-success"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colonne pour la photo du client -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-dark text-light">Operations</div>
+        <div class="card-body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

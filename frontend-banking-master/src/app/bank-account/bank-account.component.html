@@ -1,0 +1,56 @@
+<div class="container mt-4">
+  <ng-container *ngIf="bankAccounts$ | async as accountsByCustomer; else failureOrLoading">
+    <div class="card custom-card">
+      <div class="card-header bg-dark text-white">
+        <h4>All Accounts</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover custom-table">
+            <thead class="bg-secondary text-white">
+            <tr>
+              <th>ID</th>
+              <th class="text-end">Balance</th>
+              <th>Creation Date</th>
+              <th>Status</th>
+              <th>Type</th>
+              <th>Customer Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let account of bankAccounts$ | async" class="table-row">
+              <td><strong>{{account.id}}</strong></td>
+              <td class="text-end">{{account.balance | number: '1.2-2'}}</td>
+              <td>{{ account.createdDate | date: 'dd-MM-yyyy:HH-mm-ss' }}</td>
+              <td>{{account.status}}</td>
+              <td>
+                  <span class="badge rounded-pill {{ account.type.includes('CurrentAccount') ? 'bg-success' : 'bg-danger' }}">
+                    {{ account.type }}
+                  </span>
+              </td>
+              <td class="text-link" (click)="handleCustomerPageFromBankAccounts(account.customerDTO)">
+                {{account.customerDTO.name}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #failureOrLoading>
+    <ng-container *ngIf="errorMessage; else loading">
+      <div class="alert alert-danger mt-3">
+        {{ errorMessage }}
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      <div class="d-flex justify-content-center align-items-center mt-5">
+        <div class="spinner-border text-info" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

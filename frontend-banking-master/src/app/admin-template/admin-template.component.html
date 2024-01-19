@@ -1,0 +1,13 @@
+<!-- admin-template.component.html -->
+<div class="d-flex">
+    <!-- Sidebar Component -->
+    <div class="bg-dark text-light" style="width: 230px; flex-shrink: 0;">
+        <app-cards></app-cards>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="flex-grow-1">
+        <!-- Child component content here -->
+        <router-outlet></router-outlet>
+    </div>
+</div>
